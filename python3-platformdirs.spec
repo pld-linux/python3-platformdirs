@@ -1,5 +1,6 @@
 %define		module	platformdirs
 Summary:	Python module for determining appropriate platform-specific dirs
+Summary(pl.UTF-8):	Moduł Pythona do określania odpowiednich katalogów specyficznych dla platformy
 Name:		python3-%{module}
 Version:	2.4.0
 Release:	1
@@ -20,6 +21,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 A small Python module for determining appropriate platform-specific
 dirs, e.g. a "user data dir".
+
+%description -l pl.UTF-8
+Mały moduł Pythona do określania odpowiednich katalogów specyficznych
+dla platformy, np. "katalog danych użytkownika".
 
 %prep
 %setup -q -n %{module}-%{version}
