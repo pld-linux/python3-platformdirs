@@ -8,16 +8,17 @@
 Summary:	Python module for determining appropriate platform-specific dirs
 Summary(pl.UTF-8):	Moduł Pythona do określania odpowiednich katalogów specyficznych dla platformy
 Name:		python3-%{module}
-Version:	2.5.1
-Release:	4
+Version:	4.3.6
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/platformdirs/
 Source0:	https://files.pythonhosted.org/packages/source/p/platformdirs/%{module}-%{version}.tar.gz
-# Source0-md5:	83d3ce3feb4af1ccfaca24375574f44d
+# Source0-md5:	9f63e7b2b462ee13ee2bf857f2839926
 URL:		https://pypi.org/project/platformdirs/
 BuildRequires:	python3-modules >= 1:3.7
-BuildRequires:	python3-setuptools
+BuildRequires:	python3-build
+BuildRequires:	python3-installer
 %if %{with tests}
 BuildRequires:	python3-appdirs = 1.4.4
 BuildRequires:	python3-pytest >= 6
@@ -48,7 +49,7 @@ dla platformy, np. "katalog danych użytkownika".
 %setup -q -n %{module}-%{version}
 
 %build
-%py3_build
+%py3_build_pyproject
 
 %if %{with tests}
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
@@ -63,16 +64,16 @@ sphinx-build -b html -d docs/_build/doctree docs docs/_build/html
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%py3_install
+%py3_install_pyproject
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES.rst README.rst
+%doc README.rst
 %dir %{py3_sitescriptdir}/%{module}
 %{py3_sitescriptdir}/%{module}/*.py
 %{py3_sitescriptdir}/%{module}/__pycache__
 %{py3_sitescriptdir}/%{module}/py.typed
-%{py3_sitescriptdir}/%{module}-%{version}-py*.egg-info
+%{py3_sitescriptdir}/%{module}-%{version}.dist-info
