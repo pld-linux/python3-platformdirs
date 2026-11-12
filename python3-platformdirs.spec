@@ -7,15 +7,14 @@
 Summary:	Python module for determining appropriate platform-specific dirs
 Summary(pl.UTF-8):	Moduł Pythona do określania odpowiednich katalogów specyficznych dla platformy
 Name:		python3-%{module}
-Version:	4.14.2
+Version:	4.14.5
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/platformdirs/
 Source0:	https://files.pythonhosted.org/packages/source/p/platformdirs/%{module}-%{version}.tar.gz
-# Source0-md5:	07dd523bb5ca12c4525df2cd242336b1
+# Source0-md5:	512d112422d0a9d29b41e5b2d0693557
 URL:		https://pypi.org/project/platformdirs/
-BuildRequires:	python3-Cython >= 3
 BuildRequires:	python3-build
 BuildRequires:	python3-hatch-fancy-pypi-readme >= 25.1
 BuildRequires:	python3-hatch-vcs >= 0.5
