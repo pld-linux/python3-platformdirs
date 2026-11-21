@@ -7,13 +7,13 @@
 Summary:	Python module for determining appropriate platform-specific dirs
 Summary(pl.UTF-8):	Moduł Pythona do określania odpowiednich katalogów specyficznych dla platformy
 Name:		python3-%{module}
-Version:	4.14.5
+Version:	4.14.7
 Release:	1
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/platformdirs/
 Source0:	https://files.pythonhosted.org/packages/source/p/platformdirs/%{module}-%{version}.tar.gz
-# Source0-md5:	512d112422d0a9d29b41e5b2d0693557
+# Source0-md5:	f1390deb80554d49643b8434ce0b5aa0
 URL:		https://pypi.org/project/platformdirs/
 BuildRequires:	python3-build
 BuildRequires:	python3-hatch-fancy-pypi-readme >= 25.1
@@ -30,6 +30,7 @@ BuildRequires:	python3-pytest >= 9.0.2
 BuildRequires:	python3-pytest-mock >= 3.15.1
 %endif
 BuildRequires:	rpm-pythonprov
+BuildRequires:	sed >= 4.0
 BuildRequires:	rpmbuild(macros) >= 2.044
 %if %{with doc}
 BuildRequires:	python3-furo >= 2025.12.19
@@ -58,6 +59,9 @@ dla platformy, np. "katalog danych użytkownika".
 
 %prep
 %setup -q -n %{module}-%{version}
+
+# python-sbom (PEP 770 SBOM in wheel) not packaged
+%{__sed} -i -e '/"python-sbom\[hatch\]/d' -e '/^build\.hooks\.python-sbom/d' pyproject.toml
 
 %build
 %py3_build_pyproject
