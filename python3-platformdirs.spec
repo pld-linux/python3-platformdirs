@@ -8,7 +8,7 @@ Summary:	Python module for determining appropriate platform-specific dirs
 Summary(pl.UTF-8):	Moduł Pythona do określania odpowiednich katalogów specyficznych dla platformy
 Name:		python3-%{module}
 Version:	4.14.7
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/platformdirs/
@@ -69,10 +69,11 @@ dla platformy, np. "katalog danych użytkownika".
 %if %{with tests}
 # test_import_before_pytest_main deletes PYTEST_DISABLE_PLUGIN_AUTOLOAD,
 # thus breaking our manual pytest plugins selection.
+# test_import_platformdirs_skips_typing: fails when site startup (.pth) already imported typing
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 PYTEST_PLUGINS=platformdirs.pytest_plugin,pytest_mock \
 PYTHONPATH=$(pwd)/src \
-%{__python3} -m pytest tests -k 'not test_import_before_pytest_main'
+%{__python3} -m pytest tests -k 'not test_import_before_pytest_main and not test_import_platformdirs_skips_typing'
 %endif
 
 %if %{with doc}
